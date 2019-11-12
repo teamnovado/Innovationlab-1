@@ -1,0 +1,38 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <div>
+        SUM (10+5):
+        <span id="sum"></span>
+    </div>
+    <div>
+        FACTORIAL (6):
+        <span id="factorial"></span>
+    </div>
+</body>
+
+
+<script>
+    var sum = document.querySelector("#sum")
+    var factorial = document.querySelector("#factorial")
+
+    // Correct way, but unable to run on local HTTP-server due to MIME type
+    WebAssembly.instantiateStreaming(fetch('./functions.wasm'))
+        .then(obj => {
+            sum.textContent = obj.instance.exports.sum(10, 5)
+            factorial.textContent = obj.instance.exports.factorial(6);
+        });
+
+    // Deprecated way, workaround for above issue
+    fetch('functions.wasm').then(response => 
+        response.arrayBuffer()
+    ).then(bytes => 
+        WebAssembly.instantiate(bytes)
+    ).then(obj => {
+        sum.textContent = obj.instance.exports.sum(10, 5)
+        factorial.textContent = obj.instance.exports.factorial(6);
+    });
+</script>
+</html>
