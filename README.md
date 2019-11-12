@@ -1,3 +1,5 @@
+![Novado Innovationlab #1 banner](https://www.novado.be/media/cgyhjx0v/innovationlab-1-cover.png)
+
 # Innovationlab #1
 A repository containing all files and powerpoints used during Novado Innovationlab #1
 
